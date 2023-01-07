@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookDepository.Data.Models
+namespace BookDepository.Models
 {
     public class Category
     {
@@ -14,6 +14,7 @@ namespace BookDepository.Data.Models
         [Required]
         public string Name { get; set; }
         public int DisplayOrder { get; set; }
+
         public DateTime CreateDateTime { get; set; } = DateTime.Now;
     }
 }

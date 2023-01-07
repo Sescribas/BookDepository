@@ -1,5 +1,4 @@
-﻿using BookDepository.Data.Models;
-using BookDepository.Models;
+﻿using BookDepository.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -16,7 +15,7 @@ namespace BookDepository.Repository
         {
 
         }
-
+        
         public DbSet<Category> Categories { get; set; }
     }
 }

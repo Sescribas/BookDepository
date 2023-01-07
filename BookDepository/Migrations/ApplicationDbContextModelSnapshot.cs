@@ -22,7 +22,7 @@ namespace BookDepository.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("BookDepository.Data.Models.Category", b =>
+            modelBuilder.Entity("BookDepository.Models.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -39,6 +39,9 @@ namespace BookDepository.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("test")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

@@ -1,33 +1,47 @@
-﻿@using BookDepository.Data.Models;
+﻿@using BookDepository.Models;
 @model IEnumerable<Category>
 @{
     ViewData["Title"] = "Categories";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Categories</h1>
 
-<table class="table table-bordered table-striped" style="width:100%">
-    <thead>
-       <tr>
-            <th>Category Name</th>
-            <th>Display Order</th>
-            <th>Creation Date</th>
-       </tr>
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Categories</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Category" asp-action="Create" class="btn btn-primary"> 
+                <i class="bi bi-plus-circle"></i> &nbsp; Create New Category
+            </a>
+        </div>
+    </div>
 
-    </thead>
-    <tbody>
 
-        @foreach(var category in Model)
-        {
+
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
             <tr>
-                <th width="50%">@category.Name</th>
-
-                <th width="20%">@category.DisplayOrder</th>
-
-                <th width="30%">@category.CreateDateTime</th>
+                <th>Category Name</th>
+                <th>Display Order</th>
+                <th>Creation Date</th>
             </tr>
-        }
-    </tbody>
 
-</table>
+        </thead>
+        <tbody>
+
+            @foreach (var category in Model)
+            {
+                <tr>
+                    <th width="50%">@category.Name</th>
+
+                    <th width="20%">@category.DisplayOrder</th>
+
+                    <th width="30%">@category.CreateDateTime</th>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>

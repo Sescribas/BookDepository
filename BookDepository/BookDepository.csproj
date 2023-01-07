@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BookDepository.Data\BookDepository.Entities.csproj" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

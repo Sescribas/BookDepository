@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookDepository.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221229140359_First-migration")]
-    partial class Firstmigration
+    [Migration("20230107164659_update-category")]
+    partial class updatecategory
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,7 +24,7 @@ namespace BookDepository.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("BookDepository.Data.Models.Category", b =>
+            modelBuilder.Entity("BookDepository.Models.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -41,6 +41,9 @@ namespace BookDepository.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("test")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
