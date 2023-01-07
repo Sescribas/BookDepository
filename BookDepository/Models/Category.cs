@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -9,10 +10,13 @@ namespace BookDepository.Models
 {
     public class Category
     {
-        [Key]
+        [Key] 
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
+
+        [DisplayName("Display Name")]
+        [Range(1,100, ErrorMessage = "Display Order must be between 1 and 100 only")]
         public int DisplayOrder { get; set; }
 
         public DateTime CreateDateTime { get; set; } = DateTime.Now;
