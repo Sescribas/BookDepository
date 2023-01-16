@@ -1,4 +1,4 @@
-using BookDepository.Repository;
+using BookDepository.DataAccess;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
