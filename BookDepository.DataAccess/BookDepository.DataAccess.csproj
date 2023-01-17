@@ -20,4 +20,8 @@
     <ProjectReference Include="..\BookDepository.Models\BookDepository.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Repository\" />
+  </ItemGroup>
+
 </Project>
