@@ -1,22 +1,23 @@
 ﻿using BookDepository.Models;
 using BookDepository.DataAccess;
 using Microsoft.AspNetCore.Mvc;
+using BookDepository.DataAccess.Repository.IRepository;
+using BookDepository.DataAccess.Repository;
 
 namespace BookDepository.Controllers
 {
 	public class CategoryController : Controller
 	{
-		private readonly ApplicationDbContext _context;
-        //private readonly ApplicationDbContext _context;
-
-        public CategoryController(ApplicationDbContext context)
+		private readonly IUnitOfWork _uow;
+        
+        public CategoryController(IUnitOfWork uow)
 		{
-			_context = context;
+            _uow = uow;
 		}
 
 		public IActionResult Categories()
 		{
-			IEnumerable<Category> categories = _context.Categories;
+			IEnumerable<Category> categories = _uow.Category.GetAll();
 
 			return View(categories);
 		}
@@ -36,8 +37,8 @@ namespace BookDepository.Controllers
             if(categoryToInsert == null || !ModelState.IsValid)
                 return View();
 
-            _context.Categories.Add(categoryToInsert);
-            _context.SaveChanges();
+            _uow.Category.Create(categoryToInsert);
+            _uow.Save();
             TempData["success"] = "Category created succesfully";
             return RedirectToAction("Categories");
         }
@@ -48,7 +49,8 @@ namespace BookDepository.Controllers
             if (id == null || id == 0)
                 return NotFound();
 
-           Category categoryToUpdate  = _context.Categories.Find(id);
+           Category categoryToUpdate = _uow.Category.Get(id.Value);
+
 
             if (categoryToUpdate == null)
                 return NotFound();
@@ -60,13 +62,13 @@ namespace BookDepository.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Update(Category categoryToDelete)
+        public IActionResult Update(Category categoryToUpdate)
         {
-            if (categoryToDelete == null || !ModelState.IsValid)
+            if (categoryToUpdate == null || !ModelState.IsValid)
                 return View();
+            _uow.Category.Update(categoryToUpdate);
+            _uow.Save();
 
-            _context.Categories.Update(categoryToDelete);
-            _context.SaveChanges();
             TempData["success"] = "Category updated succesfully";
 
             return RedirectToAction("Categories");
@@ -77,7 +79,7 @@ namespace BookDepository.Controllers
             if (id == null || id == 0)
                 return NotFound();
 
-            Category categoryToDelete = _context.Categories.Find(id);
+            Category categoryToDelete = _uow.Category.Get(id.Value);
 
             if (categoryToDelete == null)
                 return NotFound();
@@ -86,15 +88,14 @@ namespace BookDepository.Controllers
             return View(categoryToDelete);
         }
 
-        [HttpDelete]
-        [ValidateAntiForgeryToken]
+        [HttpPost]
         public IActionResult DeleteCategory(Category categoryToDelete)
         {
             if (categoryToDelete == null || !ModelState.IsValid)
                 return View();
 
-            _context.Categories.Remove(categoryToDelete);
-            _context.SaveChanges();
+            _uow.Category.Delete(categoryToDelete);
+            _uow.Save();
             TempData["success"] = "Category deleted succesfully";
 
             return RedirectToAction("Categories");

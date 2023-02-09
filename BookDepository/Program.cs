@@ -1,4 +1,6 @@
 using BookDepository.DataAccess;
+using BookDepository.DataAccess.Repository;
+using BookDepository.DataAccess.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +12,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 				optionsBuilder => optionsBuilder.MigrationsAssembly("BookDepository")));
 builder.Services.AddRazorPages();
 
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
 
